@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>中国移动官方优选</title>
+<style>
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+}
+body {
+ background-color: #f5f7fa;
+ padding: 16px;
+ padding-bottom: 80px;
+ -webkit-text-size-adjust: 100%;
+}
+.card {
+ background: #fff;
+ border-radius: 12px;
+ padding: 20px;
+ margin-bottom: 15px;
+ box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.header-card {
+ text-align: center;
+ background: linear-gradient(135deg, #e60012, #cc0010);
+ color: #ffffff;
+ border-left: none;
+}
+.header-card h1 {
+ font-size: 22px;
+ color: #ffffff;
+ margin-bottom: 8px;
+}
+.header-card p {
+ font-size: 13px;
+ color: #ffffff;
+ opacity: 0.9;
+}
+.notice-card {
+ background-color: #fff2f2;
+ border: 1px solid #ffd9d9;
+ color: #c00000;
+ text-align: center;
+ font-size: 12px;
+ line-height: 1.6;
+}
+.group-card {
+ border-top: 3px solid #e60012;
+}
+.collapse-header {
+ font-size: 16px;
+ font-weight: bold;
+ color: #222;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ cursor: pointer;
+ user-select: none;
+ -webkit-tap-highlight-color: transparent;
+ padding: 4px 0;
+}
+.collapse-arrow {
+ transition: transform 0.3s ease;
+ font-size: 12px;
+ color: #999;
+}
+.collapse-header.active .collapse-arrow {
+ transform: rotate(180deg);
+}
+.collapse-content {
+ display: none;
+ margin-top: 15px;
+}
+.collapse-content.show {
+ display: block;
+}
+.package-card {
+ border: 1px solid #eee;
+ position: relative;
+ margin-bottom: 10px;
+ border-radius: 10px;
+}
+.package-card:last-child {
+ margin-bottom: 0;
+}
+.compare-checkbox {
+ position: absolute;
+ top: 15px;
+ right: 15px;
+ width: 20px;
+ height: 20px;
+ cursor: pointer;
+ z-index: 2;
+}
+.tag {
+ display: inline-block;
+ padding: 3px 9px;
+ border-radius: 4px;
+ font-size: 10px;
+ color: #fff;
+ margin-bottom: 10px;
+}
+.tag-hot { background: #ff3333; }
+.tag-rec { background: #16dfff; color: #fff; }
+.price-box {
+ margin: 10px 0;
+}
+.base-price {
+ font-size: 24px;
+ color: #e60012;
+ font-weight: bold;
+}
+.param-row {
+ display: flex;
+ flex-wrap: nowrap;
+ gap: 10px;
+ margin: 12px 0;
+ overflow-x: auto;
+ padding-bottom: 5px;
+ -webkit-overflow-scrolling: touch;
+}
+.param-row::-webkit-scrollbar {
+ height: 3px;
+}
+.param-row::-webkit-scrollbar-track {
+ background: #f1f1f1;
+ border-radius: 2px;
+}
+.param-row::-webkit-scrollbar-thumb {
+ background: #ccc;
+ border-radius: 2px;
+}
+.param-item {
+ background: #f5f7fa;
+ padding: 10px 12px;
+ border-radius: 8px;
+ font-size: 12px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ gap: 4px;
+ min-width: 85px;
+ flex-shrink: 0;
+}
+.param-item .icon {
+ font-size: 18px;
+ line-height: 1;
+}
+.param-item .value {
+ font-weight: bold;
+ color: #e60012;
+ font-size: 14px;
+}
+.param-item .label {
+ font-weight: bold;
+ color: #333;
+ font-size: 12px;
+}
+.package-desc {
+ font-size: 12px;
+ color: #555;
+ line-height: 1.8;
+ margin: 10px 0;
+}
+.expand-group {
+ margin: 12px 0;
+}
+.expand-title {
+ font-size: 12px;
+ margin-bottom: 8px;
+ color: #333;
+}
+.expand-options {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 8px;
+}
+.expand-option {
+ padding: 6px 12px;
+ border: 1px solid #ddd;
+ border-radius: 6px;
+ font-size: 11px;
+ cursor: pointer;
+ transition: all 0.2s;
+ white-space: nowrap;
+ -webkit-tap-highlight-color: transparent;
+}
+.expand-option.active {
+ background: #e60012;
+ color: #fff;
+ border-color: #e60012;
+}
+.btn-buy {
+ display: block;
+ width: 100%;
+ background: linear-gradient(135deg, #e60012, #cc0010);
+ color: #fff;
+ text-align: center;
+ padding: 12px;
+ border-radius: 8px;
+ text-decoration: none;
+ font-size: 14px;
+ margin-top: 15px;
+ font-weight: 600;
+ cursor: pointer;
+ border: none;
+ -webkit-tap-highlight-color: transparent;
+}
+.btn-buy:active {
+ opacity: 0.85;
+}
+.service-card {
+ background-color: #fff2f2;
+ border: 1px solid #ffd9d9;
+ text-align: center;
+ line-height: 2;
+}
+.service-card h3 {
+ font-size: 18px;
+ font-weight: bold;
+ color: #000;
+ margin-bottom: 10px;
+}
+.service-card p.sub {
+ color: #e60012;
+ font-size: 10px;
+ font-weight: bold;
+}
+.service-tel {
+ font-weight: bold;
+ color: #e60012 !important;
+ margin: 5px 0;
+}
+.btn-service {
+ display: inline-block;
+ background: linear-gradient(135deg, #e60012, #cc0010);
+ color: #fff;
+ padding: 10px 30px;
+ border-radius: 8px;
+ text-decoration: none;
+ margin-top: 10px;
+ font-size: 14px;
+ -webkit-tap-highlight-color: transparent;
+}
+.btn-service:active {
+ opacity: 0.85;
+}
+.footer-card {
+ text-align: center;
+ line-height: 2;
+ font-size: 12px;
+ color: #666;
+ background: #fff;
+}
+/* 弹窗 */
+.modal-overlay {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background: rgba(0,0,0,0.5);
+ display: none;
+ justify-content: center;
+ align-items: center;
+ z-index: 9999;
+}
+.modal-content {
+ background: #fff;
+ width: 88%;
+ max-width: 400px;
+ border-radius: 14px;
+ padding: 25px 20px;
+ text-align: center;
+ position: relative;
+ max-height: 80vh;
+ overflow-y: auto;
+}
+.modal-title {
+ font-size: 16px;
+ color: #e60012;
+ font-weight: bold;
+ margin-bottom: 20px;
+}
+.modal-card {
+ background: #f8f9fa;
+ border: 1px solid #eee;
+ border-radius: 8px;
+ padding: 16px;
+ margin: 15px 0;
+ text-align: center;
+ line-height: 1.8;
+}
+.package-card-modal {
+ border-left: 4px solid #e60012;
+}
+.package-card-info {
+ color: #e60012;
+ font-weight: bold;
+ font-size: 13px;
+}
+.agent-card-modal {
+ border-left: 4px solid #6c757d;
+}
+.agent-name {
+ font-size: 20px;
+ font-weight: bold;
+ margin: 8px 0;
+ color: #0427b3;
+}
+.agent-tel {
+ font-size: 28px;
+ font-weight: bold;
+ color: #e60012;
+ margin: 5px 0;
+}
+.agent-time {
+ font-size: 10px;
+ color: #666;
+}
+.modal-btns {
+ display: flex;
+ gap: 10px;
+ margin-top: 20px;
+ justify-content: center;
+}
+.modal-btn {
+ flex: 1;
+ max-width: 140px;
+ padding: 10px 0;
+ border-radius: 8px;
+ border: none;
+ font-size: 13px;
+ cursor: pointer;
+ font-weight: bold;
+ -webkit-tap-highlight-color: transparent;
+}
+.btn-call {
+ background: linear-gradient(135deg, #e60012, #cc0010);
+ color: #fff;
+}
+.btn-copy {
+ background: #f5f7fa;
+ color: #333;
+ border: 1px solid #ddd;
+}
+.btn-clear {
+ background: #6c757d;
+ color: #fff;
+}
+.modal-close {
+ position: absolute;
+ top: 12px;
+ right: 16px;
+ font-size: 22px;
+ cursor: pointer;
+ color: #999;
+ line-height: 1;
+}
+.modal-desc {
+ font-size: 12px;
+ color: #333;
+ margin-bottom: 10px;
+ line-height: 1.6;
+}
+/* 对比浮窗 */
+.compare-float {
+ position: fixed;
+ bottom: 30px;
+ right: 30px;
+ background: #fff;
+ padding: 12px 20px;
+ border-radius: 50px;
+ box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+ display: none;
+ align-items: center;
+ gap: 15px;
+ z-index: 999;
+ border: 1.5px solid #e60012;
+}
+.float-text {
+ font-size: 12px;
+ color: #333;
+}
+.float-text span {
+ color: #e60012;
+ font-weight: bold;
+ font-size: 14px;
+}
+.float-btn {
+ background: linear-gradient(135deg, #e60012, #cc0010);
+ color: #fff;
+ border: none;
+ padding: 7px 20px;
+ border-radius: 30px;
+ cursor: pointer;
+ font-size: 12px;
+ font-weight: 600;
+}
+/* 对比表格 */
+.compare-table {
+ width: 100%;
+ border-collapse: collapse;
+ margin-top: 10px;
+ margin-bottom: 20px;
+}
+.compare-table th,
+.compare-table td {
+ border: 1px solid #eee;
+ padding: 12px 8px;
+ text-align: center;
+ font-size: 12px;
+}
+.compare-table th {
+ background: #f8f9fa;
+ font-weight: bold;
+ color: #333;
+ width: 80px;
+}
+.compare-table td.red-text {
+ color: #e60012 !important;
+ font-weight: bold;
+}
+
+@media (max-width: 480px) {
+ body { padding: 12px; padding-bottom: 70px; }
+ .card { padding: 14px; }
+ .base-price { font-size: 20px; }
+ .header-card h1 { font-size: 18px; }
+ .param-item { min-width: 75px; padding: 8px 10px; }
+ .compare-float {
+ right: 12px;
+ left: 12px;
+ bottom: 12px;
+ border-radius: 12px;
+ justify-content: space-between;
+ }
+ .compare-table th, .compare-table td { padding: 8px 4px; font-size: 10px; }
+ .agent-tel { font-size: 24px; }
+ .btn-buy { padding: 11px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<!-- 对比浮窗 -->
+<div class="compare-float" id="compareFloat">
+ <div class="float-text">已选择 <span id="selectCount">0</span> 款套餐</div>
+ <button class="float-btn" id="startCompare">点击对比</button>
+</div>
+
+<!-- 头部 -->
+<div class="card header-card">
+ <h1>中国移动官方优选</h1>
+ <p style="font-size: 11px;">手机流量 | 家庭宽带 | 全屋智能 一站式办理</p>
+</div>
+
+<!-- 公告 -->
+<div class="card notice-card">
+ 全场套餐统一赠送：2年超大流量福利 | 月费全包无隐形消费 | 正规营业厅可查<br>
+ 💡 赠送流量期满后建议咨询续约政策
+</div>
+
+<!-- ========== 纯手机套餐 ========== -->
+<div class="card group-card">
+ <div class="collapse-header">
+ 纯手机基础套餐 <span class="collapse-arrow">▼</span>
+ </div>
+ <div class="collapse-content">
+  <!-- 39元 -->
+  <div class="card package-card" data-base="39" data-flow="100" data-call="100" data-broadband="0" data-name="39元手机套餐" data-device="无设备">
+   <input type="checkbox" class="compare-checkbox">
+   <span class="tag tag-hot">热销</span>
+   <div class="price-box"><span class="base-price">¥39 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">100G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">100分钟</div></div>
+    <div class="param-item"><div class="label">单人刚需</div><div class="value">无宽带</div></div>
+   </div>
+   <div class="package-desc">20G全国(永久)+30G定向(永久)+50G全国(赠2年)<br>标配：无设备</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+  <!-- 59元 -->
+  <div class="card package-card" data-base="59" data-flow="130" data-call="200" data-broadband="0" data-name="59元手机套餐" data-device="无设备">
+   <input type="checkbox" class="compare-checkbox">
+   <span class="tag tag-rec">推荐</span>
+   <div class="price-box"><span class="base-price">¥59 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">130G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">200分钟</div></div>
+    <div class="param-item"><div class="label">大流量优选</div><div class="value">无宽带</div></div>
+   </div>
+   <div class="package-desc">30G全国(永久)+50G定向(永久)+50G全国(赠2年)<br>标配：无设备</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+ </div>
+</div>
+
+<!-- ========== 500M宽带套餐 ========== -->
+<div class="card group-card">
+ <div class="collapse-header">
+ 500M 家庭宽带套餐（共四款） <span class="collapse-arrow">▼</span>
+ </div>
+ <div class="collapse-content">
+  <!-- 59元500M -->
+  <div class="card package-card" data-base="59" data-flow="100" data-call="100" data-broadband="500" data-name="59元500M宽带套餐" data-device="机顶盒+摄像头+遥控器">
+   <input type="checkbox" class="compare-checkbox">
+   <span class="tag tag-hot">热销</span>
+   <div class="price-box"><span class="base-price">¥59 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">100G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">100分钟</div></div>
+    <div class="param-item"><div class="label">500M</div><div class="value">宽带</div></div>
+   </div>
+   <div class="package-desc">39元基础套餐+20元设备<br>标配：机顶盒+摄像头+遥控器</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+  <!-- 69元500M -->
+  <div class="card package-card" data-base="69" data-flow="100" data-call="100" data-broadband="500" data-name="69元500M宽带套餐" data-device="机顶盒+摄像头+遥控器+普通路由器">
+   <input type="checkbox" class="compare-checkbox">
+   <div class="price-box"><span class="base-price">¥69 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">100G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">100分钟</div></div>
+    <div class="param-item"><div class="label">500M</div><div class="value">宽带</div></div>
+   </div>
+   <div class="package-desc">39元基础套餐+30元设备<br>标配：机顶盒+摄像头+遥控器+普通路由器</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+  <!-- 79元500M -->
+  <div class="card package-card" data-base="79" data-flow="130" data-call="200" data-broadband="500" data-name="79元500M宽带套餐" data-device="机顶盒+摄像头+遥控器">
+   <input type="checkbox" class="compare-checkbox">
+   <div class="price-box"><span class="base-price">¥79 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">130G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">200分钟</div></div>
+    <div class="param-item"><div class="label">500M</div><div class="value">宽带</div></div>
+   </div>
+   <div class="package-desc">59元基础套餐+20元设备<br>标配：机顶盒+摄像头+遥控器</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+  <!-- 89元500M -->
+  <div class="card package-card" data-base="89" data-flow="130" data-call="200" data-broadband="500" data-name="89元500M宽带套餐" data-device="机顶盒+摄像头+遥控器+普通路由器">
+   <input type="checkbox" class="compare-checkbox">
+   <div class="price-box"><span class="base-price">¥89 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">130G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">200分钟</div></div>
+    <div class="param-item"><div class="label">500M</div><div class="value">宽带</div></div>
+   </div>
+   <div class="package-desc">59元基础套餐+30元设备<br>标配：机顶盒+摄像头+遥控器+普通路由器</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+ </div>
+</div>
+
+<!-- ========== 1000M+FTTR ========== -->
+<div class="card group-card">
+ <div class="collapse-header">
+ 1000M+FTTR 全屋光网（共四款） <span class="collapse-arrow">▼</span>
+ </div>
+ <div class="collapse-content">
+  <!-- 69元1000M FTTR -->
+  <div class="card package-card" data-base="69" data-flow="100" data-call="100" data-broadband="1000" data-name="69元1000M FTTR套餐" data-device="主路由器+从路由器">
+   <input type="checkbox" class="compare-checkbox">
+   <div class="price-box"><span class="base-price">¥69 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">100G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">100分钟</div></div>
+    <div class="param-item"><div class="label">1000M</div><div class="value">宽带</div></div>
+   </div>
+   <div class="package-desc">39元基础套餐+30元设备<br>标配：主路由器+从路由器</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+  <!-- 89元1000M FTTR -->
+  <div class="card package-card" data-base="89" data-flow="100" data-call="100" data-broadband="1000" data-name="89元1000M FTTR套餐" data-device="主路由器+从路由器+机顶盒+摄像头+遥控器">
+   <input type="checkbox" class="compare-checkbox">
+   <div class="price-box"><span class="base-price">¥89 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">100G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">100分钟</div></div>
+    <div class="param-item"><div class="label">1000M</div><div class="value">宽带</div></div>
+   </div>
+   <div class="package-desc">39元基础套餐+50元设备<br>标配：主路由器+从路由器+机顶盒+摄像头+遥控器</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+  <!-- 89元1000M宽带 -->
+  <div class="card package-card" data-base="89" data-flow="130" data-call="200" data-broadband="1000" data-name="89元1000M宽带套餐" data-device="机顶盒+摄像头+遥控器">
+   <input type="checkbox" class="compare-checkbox">
+   <div class="price-box"><span class="base-price">¥89 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">130G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">200分钟</div></div>
+    <div class="param-item"><div class="label">1000M</div><div class="value">宽带</div></div>
+   </div>
+   <div class="package-desc">59元基础套餐+30元设备<br>标配：机顶盒+摄像头+遥控器</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+  <!-- 109元1000M FTTR -->
+  <div class="card package-card" data-base="109" data-flow="130" data-call="200" data-broadband="1000" data-name="109元1000M FTTR套餐" data-device="主路由器+从路由器+机顶盒+摄像头+遥控器">
+   <input type="checkbox" class="compare-checkbox">
+   <div class="price-box"><span class="base-price">¥109 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">130G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">200分钟</div></div>
+    <div class="param-item"><div class="label">1000M</div><div class="value">宽带</div></div>
+   </div>
+   <div class="package-desc">59元基础套餐+50元设备<br>标配：主路由器+从路由器+机顶盒+摄像头+遥控器</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+ </div>
+</div>
+
+<!-- ========== 1000M+F3 ========== -->
+<div class="card group-card">
+ <div class="collapse-header">
+ 1000M+F3 全屋光网（共两款） <span class="collapse-arrow">▼</span>
+ </div>
+ <div class="collapse-content">
+  <!-- 79元1000M F3 -->
+  <div class="card package-card" data-base="79" data-flow="100" data-call="100" data-broadband="1000" data-name="79元1000M F3套餐" data-device="F3一体机+从路由器+摄像头+遥控器">
+   <input type="checkbox" class="compare-checkbox">
+   <div class="price-box"><span class="base-price">¥79 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">100G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">100分钟</div></div>
+    <div class="param-item"><div class="label">1000M</div><div class="value">宽带</div></div>
+   </div>
+   <div class="package-desc">39元基础套餐+40元设备<br>标配：F3一体机+从路由器+摄像头+遥控器</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+  <!-- 99元1000M F3 -->
+  <div class="card package-card" data-base="99" data-flow="130" data-call="200" data-broadband="1000" data-name="99元1000M F3套餐" data-device="F3一体机+从路由器+摄像头+遥控器">
+   <input type="checkbox" class="compare-checkbox">
+   <div class="price-box"><span class="base-price">¥99 /月</span></div>
+   <div class="param-row">
+    <div class="param-item"><div class="icon">📶</div><div class="value" data-key="flow">130G</div></div>
+    <div class="param-item"><div class="icon">📞</div><div class="value" data-key="call">200分钟</div></div>
+    <div class="param-item"><div class="label">1000M</div><div class="value">宽带</div></div>
+   </div>
+   <div class="package-desc">59元基础套餐+40元设备<br>标配：F3一体机+从路由器+摄像头+遥控器</div>
+   <div class="expand-group">
+    <div class="expand-title">通话扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-call="0">不选择</div>
+     <div class="expand-option" data-add="1" data-call="100">+1¥=100分钟</div>
+     <div class="expand-option" data-add="5" data-call="500">+5¥=500分钟</div>
+    </div>
+   </div>
+   <div class="expand-group">
+    <div class="expand-title">流量扩容包（3年合约）</div>
+    <div class="expand-options">
+     <div class="expand-option active" data-add="0" data-flow="0">不选择</div>
+     <div class="expand-option" data-add="1" data-flow="5">+1¥=5G</div>
+     <div class="expand-option" data-add="5" data-flow="25">+5¥=25G</div>
+     <div class="expand-option" data-add="10" data-flow="50">+10¥=50G</div>
+    </div>
+   </div>
+   <button class="btn-buy">立即办理</button>
+  </div>
+ </div>
+</div>
+
+<!-- 专属客服 -->
+<div class="card service-card">
+ <h3>专属客服咨询</h3>
+ <p class="sub">办理疑问 | 套餐咨询 | 上门安装</p>
+ <a href="#" class="btn-service" id="serviceBtn">立即联系客服</a>
+</div>
+
+<!-- 底部 -->
+<div class="card footer-card">
+ <p>中国移动官方正规套餐 | 线下营业厅可查</p>
+ <p>免费上门安装调试 | 无捆绑消费，合约透明</p>
+ <p>© 2026 China Mobile. All rights reserved.</p>
+</div>
+
+<!-- 办理弹窗 -->
+<div class="modal-overlay" id="modal">
+ <div class="modal-content">
+  <span class="modal-close" id="closeModal">×</span>
+  <div class="modal-title">办理申请已提交</div>
+  <div class="modal-desc" style="color:#0427b3;font-weight:bold;">请直接联系业务员确认办理</div>
+  <div class="modal-card package-card-modal">
+   <div id="modalPackage" class="package-card-info">¥39 /月 | 100G | 100分钟 | 0M宽带</div>
+  </div>
+  <div class="modal-card agent-card-modal">
+   <div class="agent-name">王经理</div>
+   <div class="agent-tel" id="agentTel">13720709870</div>
+   <div class="agent-time">工作时间：09:00 - 21:00</div>
+  </div>
+  <div class="modal-btns">
+   <a href="tel:13720709870" class="modal-btn btn-call">立即拨打电话</a>
+   <button class="modal-btn btn-copy" id="copyTel">复制手机号</button>
+  </div>
+ </div>
+</div>
+
+<!-- 对比弹窗 -->
+<div class="modal-overlay" id="compareModal">
+ <div class="modal-content">
+  <span class="modal-close" id="closeCompareModal">×</span>
+  <div class="modal-title">套餐对比结果</div>
+  <div id="compareContainer"></div>
+  <div class="modal-btns">
+   <button class="modal-btn btn-clear" id="clearSelection">清空选择</button>
+  </div>
+ </div>
+</div>
+
+<script>
+(function(){
+ // ③ 折叠面板
+ document.querySelectorAll('.collapse-header').forEach(function(header) {
+  header.addEventListener('click', function(){
+   this.classList.toggle('active');
+   var content = this.nextElementSibling;
+   content.classList.toggle('show');
+  });
+ });
+
+ // ④ 扩容包
+ document.querySelectorAll('.expand-option').forEach(function(option) {
+  option.addEventListener('click', function(){
+   var wrap = this.parentElement;
+   wrap.querySelectorAll('.expand-option').forEach(function(el) { el.classList.remove('active'); });
+   this.classList.add('active');
+
+   var card = this.closest('.package-card');
+   if (!card) return;
+   var basePrice = parseInt(card.getAttribute('data-base'));
+   var baseFlow  = parseInt(card.getAttribute('data-flow'));
+   var baseCall  = parseInt(card.getAttribute('data-call'));
+
+   var groups = card.querySelectorAll('.expand-group');
+   var callAddEl = groups[0].querySelector('.expand-option.active');
+   var flowAddEl = groups[1].querySelector('.expand-option.active');
+
+   var priceAdd = parseInt(callAddEl.getAttribute('data-add')) + parseInt(flowAddEl.getAttribute('data-add'));
+   var callAdd  = parseInt(callAddEl.getAttribute('data-call'));
+   var flowAdd  = parseInt(flowAddEl.getAttribute('data-flow'));
+
+   var totalPrice = basePrice + priceAdd;
+   var totalCall  = baseCall  + callAdd;
+   var totalFlow  = baseFlow  + flowAdd;
+
+   card.querySelector('.base-price').innerText = '\u00a5' + totalPrice + ' /月';
+   var values = card.querySelectorAll('.value[data-key]');
+   values.forEach(function(el){
+    if (el.getAttribute('data-key') === 'flow') el.innerText = totalFlow + 'G';
+    if (el.getAttribute('data-key') === 'call') el.innerText = totalCall + '\u5206\u949f';
+   });
+  });
+ });
+
+ // ⑤ 对比
+ var checkboxes = document.querySelectorAll('.compare-checkbox');
+ var compareFloat = document.getElementById('compareFloat');
+ var selectCount = document.getElementById('selectCount');
+ var startCompare = document.getElementById('startCompare');
+ var compareModal = document.getElementById('compareModal');
+ var closeCompareModal = document.getElementById('closeCompareModal');
+ var clearSelectionBtn = document.getElementById('clearSelection');
+ var compareContainer = document.getElementById('compareContainer');
+
+ function updateSelectCount() {
+  var count = document.querySelectorAll('.compare-checkbox:checked').length;
+  selectCount.textContent = count;
+  compareFloat.style.display = count > 0 ? 'flex' : 'none';
+ }
+
+ checkboxes.forEach(function(cb) {
+  cb.addEventListener('change', function(){
+   var checkedCount = document.querySelectorAll('.compare-checkbox:checked').length;
+   if (checkedCount > 4) {
+    this.checked = false;
+    alert('\u6700\u591a\u53ea\u80fd\u9009\u62e94\u6b3e\u5957\u9910\u8fdb\u884c\u5bf9\u6bd4\uff01');
+   }
+   updateSelectCount();
+  });
+ });
+
+ function renderCompare(checkedBoxes) {
+  compareContainer.innerHTML = '';
+  var packageList = [];
+
+  checkedBoxes.forEach(function(box) {
+   var card = box.closest('.package-card');
+   var values = card.querySelectorAll('.value[data-key]');
+   var flowText = '';
+   var callText = '';
+   values.forEach(function(el){
+    if (el.getAttribute('data-key') === 'flow') flowText = el.innerText;
+    if (el.getAttribute('data-key') === 'call') callText = el.innerText;
+   });
+   packageList.push({
+    name: card.getAttribute('data-name'),
+    price: card.querySelector('.base-price').innerText,
+    flow: flowText,
+    call: callText,
+    broadband: card.getAttribute('data-broadband') + 'M',
+    device: card.getAttribute('data-device')
+   });
+  });
+
+  var fields = [
+   { key: 'name', label: '\u540d\u79f0' },
+   { key: 'price', label: '\u6708\u8d39' },
+   { key: 'flow', label: '\u6d41\u91cf' },
+   { key: 'call', label: '\u901a\u8bdd' },
+   { key: 'broadband', label: '\u5bbd\u5e26' },
+   { key: 'device', label: '\u8bbe\u5907' }
+  ];
+
+  var diffMap = {};
+  fields.forEach(function(f) {
+   var vals = packageList.map(function(item) { return item[f.key]; });
+   diffMap[f.key] = !vals.every(function(v) { return v === vals[0]; });
+  });
+
+  var html = '<table class="compare-table"><tr><th>\u5957\u9910</th>';
+  packageList.forEach(function(_, idx) {
+   html += '<th>\u5957\u9910' + (idx+1) + '</th>';
+  });
+  html += '</tr>';
+
+  fields.forEach(function(f) {
+   html += '<tr><th>' + f.label + '</th>';
+   packageList.forEach(function(item) {
+    html += '<td' + (diffMap[f.key] ? ' class="red-text"' : '') + '>' + item[f.key] + '</td>';
+   });
+   html += '</tr>';
+  });
+  html += '</table>';
+  compareContainer.innerHTML = html;
+ }
+
+ startCompare.addEventListener('click', function(){
+  var checked = document.querySelectorAll('.compare-checkbox:checked');
+  if (checked.length === 0) { alert('\u8bf7\u5148\u9009\u62e9\u9700\u8981\u5bf9\u6bd4\u7684\u5957\u9910\uff01'); return; }
+  renderCompare(checked);
+  compareModal.style.display = 'flex';
+ });
+
+ clearSelectionBtn.addEventListener('click', function(){
+  document.querySelectorAll('.compare-checkbox').forEach(function(cb) { cb.checked = false; });
+  updateSelectCount();
+  compareModal.style.display = 'none';
+ });
+ closeCompareModal.addEventListener('click', function(){ compareModal.style.display = 'none'; });
+ compareModal.addEventListener('click', function(e){ if (e.target === compareModal) compareModal.style.display = 'none'; });
+
+ // ⑥ 办理弹窗
+ var modal = document.getElementById('modal');
+ var closeModal = document.getElementById('closeModal');
+ var modalPackage = document.getElementById('modalPackage');
+ var copyTel = document.getElementById('copyTel');
+
+ document.querySelectorAll('.btn-buy').forEach(function(btn) {
+  btn.addEventListener('click', function(){
+   var card = this.closest('.package-card');
+   var values = card.querySelectorAll('.value[data-key]');
+   var flowText = '', callText = '';
+   values.forEach(function(el){
+    if (el.getAttribute('data-key') === 'flow') flowText = el.innerText;
+    if (el.getAttribute('data-key') === 'call') callText = el.innerText;
+   });
+   modalPackage.innerText = card.querySelector('.base-price').innerText + ' | ' + flowText + ' | ' + callText + ' | ' + card.getAttribute('data-broadband') + 'M\u5bbd\u5e26';
+   modal.style.display = 'flex';
+  });
+ });
+
+ closeModal.addEventListener('click', function(){ modal.style.display = 'none'; });
+ modal.addEventListener('click', function(e){ if (e.target === modal) modal.style.display = 'none'; });
+
+ copyTel.addEventListener('click', function(){
+  var tel = document.getElementById('agentTel').innerText;
+  if (navigator.clipboard) {
+   navigator.clipboard.writeText(tel).then(function(){ alert('\u624b\u673a\u53f7\u590d\u5236\u6210\u529f\uff01'); }).catch(function(){ alert('\u590d\u5236\u5931\u8d25\uff0c\u8bf7\u624b\u52a8\u590d\u5236\uff01'); });
+  } else {
+   alert('\u8bf7\u624b\u52a8\u590d\u5236\u624b\u673a\u53f7\uff1a' + tel);
+  }
+ });
+
+ // ⑦ 客服按钮
+ document.getElementById('serviceBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  modal.style.display = 'flex';
+  modalPackage.innerText = '\u5ba2\u670d\u54a8\u8be2';
+ });
+
+ // ⑧ 初始展开第一个分组
+ window.addEventListener('DOMContentLoaded', function(){
+  var first = document.querySelector('.collapse-header');
+  if (first) first.click();
+ });
+})();
+</script>
+
+</body>
+</html>
